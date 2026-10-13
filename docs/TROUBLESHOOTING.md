@@ -76,4 +76,4 @@ This is persistent project memory. Update it when a failure changes the implemen
 
 **Resolution:** uv now selects the official CPU PyTorch index on Linux, while macOS uses the normal native wheel. Updated the lockfile.
 
-**Validation boundary:** local Apple Silicon tests are verified. The GitHub workflow is configured to install and run the CPU environment, but Linux execution must be reported only after an actual CI run succeeds.
+**Verification:** the clean Apple Silicon environment passed all 65 tests. [GitHub Actions on Ubuntu](https://github.com/MothukuruPunith/nexusai-evidence-intelligence/actions/runs/38451056893) then successfully installed the locked CPU environment and completed lint, database setup, model download and the full test command for commit `1b42939`.

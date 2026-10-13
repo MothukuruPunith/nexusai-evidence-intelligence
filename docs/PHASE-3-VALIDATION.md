@@ -35,7 +35,7 @@ A PyTorch/FAISS OpenMP runtime conflict caused native crashes. Import ordering i
 
 ## Remaining validation boundaries
 
-- Linux/GitHub CI has not yet been reported as executed; local test success does not imply remote success.
+- GitHub Actions on Ubuntu completed successfully for commit `1b42939`: locked CPU dependency installation, lint/format, PostgreSQL setup/migration, model download and the full test command. [Recorded run](https://github.com/MothukuruPunith/nexusai-evidence-intelligence/actions/runs/38451056893).
 - No load-test, RSS/latency benchmark, OCR quality evaluation, penetration test or representative retrieval benchmark was run.
 - Parse failures are isolated and timed out, but parser memory use is not controlled by a hardened OS quota.
 - No trained ML/DL result, generation faithfulness metric, contradiction metric or agent success rate exists yet.
