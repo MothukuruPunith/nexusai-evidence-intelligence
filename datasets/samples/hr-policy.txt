@@ -1,0 +1,5 @@
+NexusAI demonstration corpus — synthetic company policy
+
+Employees at the fictional company receive 20 annual leave days per calendar year.
+This sample applies to full-time employees in the fictional North region.
+It is demonstration data, not an actual employment policy.

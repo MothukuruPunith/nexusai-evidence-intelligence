@@ -1,0 +1,3 @@
+date,product,region,orders,units,revenue,expenses,currency
+2025-08-31,Demo Subscription,North,100,100,100000.00,40000.00,INR
+2025-09-30,Demo Subscription,North,85,85,85000.00,42000.00,INR

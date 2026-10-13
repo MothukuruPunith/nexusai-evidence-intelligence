@@ -1,0 +1,35 @@
+name: nexusai-validation
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.0"
+          python-version: "3.11"
+      - run: uv sync --locked
+      - run: uv run ruff check . && uv run ruff format --check .
+      - run: uv run python scripts/configure_local.py
+      - run: docker compose up -d --wait db
+      - run: uv run python scripts/bootstrap_database.py
+      - run: uv run alembic upgrade head
+      - run: uv run python scripts/download_embedding_model.py
+        env:
+          HF_HOME: .cache/huggingface
+          HF_HUB_DISABLE_XET: "1"
+      - run: uv run pytest -q --junitxml=docs/ci-test-results.xml
+        env:
+          NEXUS_RUN_DB_TESTS: "1"
+          NEXUS_RUN_MODEL_TESTS: "1"
+          HF_HUB_OFFLINE: "1"
+          HF_HOME: .cache/huggingface
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: docs/ci-test-results.xml
+      - if: always()
+        run: docker compose down

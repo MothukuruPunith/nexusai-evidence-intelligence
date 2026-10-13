@@ -1,0 +1,45 @@
+{
+  "recorded_at": "2026-10-13T18:48:23.455858+00:00",
+  "synthetic": true,
+  "checks": [
+    {
+      "file": "hr-policy.txt",
+      "query": "How many annual leave days?",
+      "status": "retrieved_and_source_verified",
+      "rank": 1,
+      "top_hit_matches": true,
+      "document_id": "55012a68-aee7-493e-bbf3-48101a486c8a",
+      "chunk_id": "f010e173-85af-51b2-bcc8-bf8a19f5fa2c",
+      "locator": "paragraph:2",
+      "quote": "Employees at the fictional company receive 20 annual leave days per calendar year.\nThis sample applies to full-time employees in the fictional North region.\nIt is demonstration data, not an actual employment policy.",
+      "retrieval_score": 0.7700005173683167,
+      "generation_id": "fc79e6db-c7e4-4758-a814-8f90a0b5abb7"
+    },
+    {
+      "file": "operations-note.txt",
+      "query": "When is customer support open?",
+      "status": "retrieved_and_source_verified",
+      "rank": 1,
+      "top_hit_matches": true,
+      "document_id": "eac0a172-80ca-4fa3-8fb1-9f6852fcb6ca",
+      "chunk_id": "dae46d7d-3423-565f-9f5b-09e6b1ecd074",
+      "locator": "paragraph:2",
+      "quote": "Customer support operates from 09:00 to 17:00 on weekdays.\nDatabase backups are retained for 45 days.",
+      "retrieval_score": 0.5375915765762329,
+      "generation_id": "fc79e6db-c7e4-4758-a814-8f90a0b5abb7"
+    },
+    {
+      "file": "sales.csv",
+      "query": "September 2025 revenue",
+      "status": "retrieved_and_source_verified",
+      "rank": 2,
+      "top_hit_matches": false,
+      "document_id": "4552faee-d08e-4d51-ac36-219c4c37d0d7",
+      "chunk_id": "28bddc09-80d4-56d4-a3d7-fdab92829c90",
+      "locator": "csv_record:3",
+      "quote": "date: 2025-09-30 | product: Demo Subscription | region: North | orders: 85 | units: 85 | revenue: 85000.00 | expenses: 42000.00 | currency: INR",
+      "retrieval_score": 0.5025978088378906,
+      "generation_id": "fc79e6db-c7e4-4758-a814-8f90a0b5abb7"
+    }
+  ]
+}

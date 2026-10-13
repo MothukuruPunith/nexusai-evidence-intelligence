@@ -1,0 +1,20 @@
+name: nexusai
+services:
+  db:
+    image: postgres:17-bookworm@sha256:3645570cccdfa447589da9f57dd740faa29b30938e861289a5574b6ca6b03826
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?Run scripts/configure_local.py}
+      POSTGRES_USER: ${POSTGRES_USER:?Run scripts/configure_local.py}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run scripts/configure_local.py}
+    ports:
+      - "127.0.0.1:${NEXUS_DB_PORT:-55432}:5432"
+    volumes:
+      - nexusai_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+volumes:
+  nexusai_pgdata:

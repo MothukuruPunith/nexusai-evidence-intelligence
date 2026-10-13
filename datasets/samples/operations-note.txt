@@ -1,0 +1,7 @@
+NexusAI demonstration corpus — synthetic operations note
+
+Customer support operates from 09:00 to 17:00 on weekdays.
+Database backups are retained for 45 days.
+
+In September 2025, a planned maintenance window affected the fictional North storefront.
+This note alone does not establish that maintenance caused any change in sales.
