@@ -77,3 +77,33 @@ This is persistent project memory. Update it when a failure changes the implemen
 **Resolution:** uv now selects the official CPU PyTorch index on Linux, while macOS uses the normal native wheel. Updated the lockfile.
 
 **Verification:** the clean Apple Silicon environment passed all 65 tests. [GitHub Actions on Ubuntu](https://github.com/MothukuruPunith/nexusai-evidence-intelligence/actions/runs/38451056893) then successfully installed the locked CPU environment and completed lint, database setup, model download and the full test command for commit `1b42939`.
+
+## 10. Qwen download stalled on IPv6 - 14 October 2026
+
+**Observed:** Ollama downloaded part of the 2.5 GB Qwen model, then repeatedly timed out connecting to an IPv6 storage address.
+
+**Resolution:** downloaded the same official registry manifest and blobs over HTTPS with IPv4, resumed the partial transfer, and checked every blob's SHA-256 and size against the manifest before installation. The installed model digest is `0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0`. No replacement model or unverified third-party weights were used.
+
+**Additional issue:** starting an empty Ollama server during the manual installation pruned the not-yet-referenced config blob. Reinstalled that small verified blob after the manifest was in place. Normally use `ollama pull`; a manual registry installation requires complete manifests and blobs before starting the server.
+
+## 11. Ollama inside the assistant sandbox could not initialize Metal - 14 October 2026
+
+**Observed:** the model downloaded correctly but the sandbox-launched server returned Metal command-queue and buffer-allocation errors. Requesting zero GPU layers still failed during backend initialization. This is not evidence that a 4B model exceeds the Mac's physical RAM.
+
+**Resolution:** obtained filesystem permission to install the already verified files into the existing native Ollama app's model store. Used the normally running app on port 11434. The structured Qwen smoke request and the full local test suite then passed. The private `.env` points to that app; there is no cloud fallback.
+
+## 12. Resumed work while Docker was stopped - 14 October 2026
+
+**Observed:** after resumption, the database tests failed because Docker was no longer running. Starting Docker through this session failed with a macOS executable/launch error.
+
+**Resolution:** the user started Docker Desktop. The existing project database container became healthy and the full suite passed: 87 tests, including the opt-in local LLM test. Do not delete volumes or regenerate database credentials for a stopped engine.
+
+**Reporting precaution:** a failed database traceback can include connection details. The failed generated report was removed; the published JUnit report is from the passing run. Check generated reports for secrets before committing, not just application source files.
+
+## 13. Context construction and environment validation - 14 October 2026
+
+**Identified during review:** repeatedly removing one character while recounting JSON bytes could become expensive for long extracted spans. Integer Literal configuration also rejected environment strings such as `-1`.
+
+**Resolution:** context shortening uses a binary search over prefix length. The GPU-layer setting is a bounded integer field so environment values parse correctly. Citation checks reject end offsets beyond the stored block. Provider errors are returned as fixed safe codes.
+
+**Verification:** unit checks plus the 87-test full local run passed. CPU selection remains available, but did not solve the Metal initialization restriction above.

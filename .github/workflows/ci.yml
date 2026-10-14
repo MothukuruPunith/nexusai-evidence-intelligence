@@ -20,7 +20,7 @@ jobs:
         env:
           HF_HOME: .cache/huggingface
           HF_HUB_DISABLE_XET: "1"
-      - run: uv run pytest -q --junitxml=docs/ci-test-results.xml
+      - run: uv run pytest -q -m 'not llm' --tb=short --junitxml=docs/ci-test-results.xml
         env:
           NEXUS_RUN_DB_TESTS: "1"
           NEXUS_RUN_MODEL_TESTS: "1"

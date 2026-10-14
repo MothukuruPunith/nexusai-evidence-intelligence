@@ -10,8 +10,9 @@ class UploadBodyLimit:
         self.app = app
 
     async def __call__(self, scope, receive, send):
-        if scope["type"] != "http" or scope["path"] != "/documents/upload":
+        if scope["type"] != "http" or scope["path"] not in {"/documents/upload", "/rag/query"}:
             return await self.app(scope, receive, send)
+        maximum = 16 * 1024 if scope["path"] == "/rag/query" else MAX_REQUEST
         parts = []
         size = 0
         while True:
@@ -20,7 +21,7 @@ class UploadBodyLimit:
                 return
             value = message.get("body", b"")
             size += len(value)
-            if size > MAX_REQUEST:
+            if size > maximum:
                 response = JSONResponse(
                     status_code=413,
                     content={

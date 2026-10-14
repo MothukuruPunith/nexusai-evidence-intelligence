@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "nexusai"
-version = "0.2.0"
+version = "0.3.0"
 description = "Evidence-first business intelligence — phased implementation"
 requires-python = ">=3.11,<3.12"
 dependencies = [
@@ -38,7 +38,7 @@ packages = ["src/nexusai"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-markers = ["integration: requires the dedicated NexusAI PostgreSQL instance", "model: requires the downloaded pinned embedding model"]
+markers = ["integration: requires the dedicated NexusAI PostgreSQL instance", "model: requires the downloaded pinned embedding model", "llm: requires local Ollama and the pinned Qwen model"]
 
 [tool.ruff]
 line-length = 100

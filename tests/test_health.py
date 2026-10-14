@@ -137,4 +137,6 @@ def test_openapi_only_exposes_implemented_routes():
             "/jobs/{job_id}",
             "/jobs/{job_id}/retry",
             "/index/status",
+            "/rag/query",
+            "/rag/citations/{chunk_id}",
         }

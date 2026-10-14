@@ -17,12 +17,14 @@ from nexusai.documents.api import router
 from nexusai.documents.embedding import Embedder
 from nexusai.documents.errors import DocumentError
 from nexusai.documents.limits import UploadBodyLimit
+from nexusai.rag.api import router as rag_router
+from nexusai.rag.generator import Generator
 
 
 class HealthResponse(BaseModel):
     status: str
     version: str
-    phase: int = 3
+    phase: int = 4
     database: str
 
 
@@ -35,6 +37,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         application.state.engine = create_database_engine(configuration)
         application.state.settings = configuration
         application.state.embedder = Embedder(configuration.model_dir)
+        application.state.generator = Generator(configuration)
         try:
             yield
         finally:
@@ -45,6 +48,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     application.add_middleware(UploadBodyLimit)
     application.include_router(router)
+    application.include_router(rag_router)
 
     @application.exception_handler(DocumentError)
     async def document_error(request: Request, exc: DocumentError):
