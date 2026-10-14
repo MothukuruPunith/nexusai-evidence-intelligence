@@ -2,7 +2,7 @@
 
 NexusAI is a project I’m building to learn how to use local language models with documents. The idea is to upload files, ask a question, and see the source text behind the answer.
 
-It runs locally on my MacBook Air M4 with 16 GB RAM. The backend uses FastAPI, PostgreSQL and FAISS. There is no frontend yet; I use FastAPI’s API docs to try the features.
+The backend uses FastAPI, PostgreSQL and FAISS. There is no frontend yet; I use FastAPI’s API docs to try the features.
 
 ## What works
 
