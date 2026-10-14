@@ -33,7 +33,7 @@ The September evidence remained at retrieval rank 2, as in the earlier dense-sea
 
 ## Remote validation
 
-The GitHub workflow runs the non-LLM suite with a real PostgreSQL instance and the downloaded embedding model. Qwen is tested locally; the CI command explicitly deselects the `llm` marker. Remote success is reported only after observing a completed run.
+The GitHub workflow runs the non-LLM suite with a real PostgreSQL instance and the downloaded embedding model. Qwen is tested locally; the CI command explicitly deselects the `llm` marker. The [GitHub Actions run for commit ab1e2f9](https://github.com/MothukuruPunith/nexusai-evidence-intelligence/actions/runs/38602829490) completed successfully on Ubuntu. This validates the non-LLM suite; the local Qwen test remains separately recorded above.
 
 ## Limits
 
